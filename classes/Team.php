@@ -73,7 +73,7 @@ class Team
             $this->_matches[$id]['win'],
             $this->_matches[$id]['draw'],
             $this->_matches[$id]['defeat'],
-            $this->_matches[$id]['goals']['_scored'],
+            $this->_matches[$id]['goals']['scored'],
             $this->_matches[$id]['goals']['skiped'],
         );
     }

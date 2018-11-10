@@ -50,14 +50,11 @@ class Team
         3 => 15,
     );
 
-    protected $penalty = array(
-        0 => 10,
-        1 => 10,
-    );
+    protected $penalty = 5;
 
     private $_matchResults = array();
 
-    private $_penaltyResults = array();
+    private $_penaltyResults = array(0, 0);
 
     public function loadMatches(array $data)
     {
@@ -217,25 +214,45 @@ class Team
                 return $results;
         }
 
-        while (false === ($results[0] !== $results[1]))
-        {
-            for ($i = 0; $i < sizeof($this->penalty); ++$i)
-            {
-                $goalTeam = $goalOpponent = 0;
+        if ($results[0] === $results[1])
 
-                for ($ii = 0; $ii < $this->penalty[$i]; ++$ii)
-                {
-                    $this->fetchGoal($goalTeam, $goalOpponent);
-                }
-
-                $results[0] += $goalTeam;
-                $results[1] += $goalOpponent;
-
-                $this->_penaltyResults = array($goalTeam, $goalOpponent);
-            }
-        }
+            $this->tryPenalty($results);
 
         return $results;
+    }
+
+    protected function tryPenalty(& $matchResults)
+    {
+        $try = 0;
+
+        while ($try < $this->penalty)
+        {
+            $goalTeam = $goalOpponent = 0;
+
+            $this->fetchGoal($goalTeam, $goalOpponent);
+
+            $matchResults[0] += $goalTeam;
+            $matchResults[1] += $goalOpponent;
+
+            $this->_penaltyResults[0] += $goalTeam;
+            $this->_penaltyResults[1] += $goalOpponent;
+
+            if (($this->_penaltyResults[0] >= 4 && $this->_penaltyResults[1] <= 1)
+
+                || ($this->_penaltyResults[1] >= 4 && $this->_penaltyResults[0] <= 1))
+
+                return;
+
+            $try += 1;
+        }
+
+        while ($this->_penaltyResults[0] === $this->_penaltyResults[1])
+        {
+            $this->fetchGoal($this->_penaltyResults[0], $this->_penaltyResults[1]);
+
+            $matchResults[0] += $this->_penaltyResults[0];
+            $matchResults[1] += $this->_penaltyResults[1];
+        }
     }
 
     protected function fetchGoal(& $goalTeam, & $goalOpponent)

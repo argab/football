@@ -55,7 +55,7 @@ $penalty = $team->getPenaltyResults();
             <th><?php echo $matchResults[0][0]; ?></th>
             <th><?php echo $matchResults[1][0]; ?></th>
             <th><?php echo (isset($matchResults[2][0]) ? $matchResults[2][0] : null); ?></th>
-            <th><?php echo (isset($matchResults[3][0]) ? $matchResults[2][0] : null); ?></th>
+            <th><?php echo (isset($matchResults[3][0]) ? $matchResults[3][0] : null); ?></th>
             <th><?php echo (isset($penalty[0]) ? $penalty[0] : null); ?></th>
             <th><?php echo $results[0]; ?></th>
         </tr>
@@ -64,7 +64,7 @@ $penalty = $team->getPenaltyResults();
             <th><?php echo $matchResults[0][1]; ?></th>
             <th><?php echo $matchResults[1][1]; ?></th>
             <th><?php echo (isset($matchResults[2][1]) ? $matchResults[2][1] : null); ?></th>
-            <th><?php echo (isset($matchResults[3][1]) ? $matchResults[2][1] : null); ?></th>
+            <th><?php echo (isset($matchResults[3][1]) ? $matchResults[3][1] : null); ?></th>
             <th><?php echo (isset($penalty[1]) ? $penalty[1] : null); ?></th>
             <th><?php echo $results[1]; ?></th>
         </tr>

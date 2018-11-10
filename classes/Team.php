@@ -56,9 +56,9 @@ class Team
 
     private $_penaltyResults = array(0, 0);
 
-    public function loadMatches(array $data)
+    public function __construct(array $matches)
     {
-        $this->_matches = $data;
+        $this->_matches = $matches;
     }
 
     protected function loadTeam($id)
@@ -110,19 +110,14 @@ class Team
         return $this->_penaltyResults;
     }
 
-    public function scoreUp()
+    private function scoreUp()
     {
         $this->_score[] = 1;
     }
 
-    public function scoreDown()
+    private function scoreDown()
     {
         $this->_score[] = 0;
-    }
-
-    public function resetScore()
-    {
-        $this->_score = array();
     }
 
     protected function fetchScore()
@@ -176,15 +171,9 @@ class Team
     {
         $this->loadTeam($c1);
 
-        $this->_opponent = new Team;
-
-        $this->_opponent->loadMatches($this->_matches);
+        $this->_opponent = new Team($this->_matches);
 
         $this->_opponent->loadTeam($c2);
-
-        $this->resetScore();
-
-        $this->_opponent->resetScore();
 
         $this->fetchScore();
 

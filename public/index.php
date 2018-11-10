@@ -8,9 +8,7 @@ require_once '../classes/Team.php';
 
 $dataMatches = include '../storage/data-matches.php';
 
-$team = new Team;
-
-$team->loadMatches($dataMatches);
+$team = new Team($dataMatches);
 
 $results = $team->match(1, 2);
 

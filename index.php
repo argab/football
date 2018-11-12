@@ -6,9 +6,9 @@
 
 function match($c1, $c2)
 {
-    require_once '../classes/Team.php';
+    require_once 'classes/Team.php';
 
-    $dataMatches = include '../storage/data-matches.php';
+    $dataMatches = include 'storage/data-matches.php';
 
     $team = new Team($dataMatches);
 

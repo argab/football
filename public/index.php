@@ -14,3 +14,5 @@ function match($c1, $c2)
 
     return $team->match($c1, $c2);
 }
+
+var_dump(match(1, 2));
